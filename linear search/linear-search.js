@@ -6,8 +6,8 @@
  * rate: there might be a better solution.
  */
 
-const arrLinear = [1, 2, 3, 4, 5, 6, 7];
-const arrSorted = [6, 1, 7, 4, 5, 3, 2];
+const arrSorted = [1, 2, 3, 4, 5, 6, 7];
+const arrNotSorted = [6, 1, 7, 4, 5, 3, 2];
 
 function linearSearch(arr, search) {
   for (let index = 0; index < arr.length; index++) {
@@ -18,8 +18,8 @@ function linearSearch(arr, search) {
 
 //results
 
-console.log(linearSearch(arrLinear, 7));
+console.log(linearSearch(arrSorted, 7));
 //output: 7 has the index of 6
 
-console.log(linearSearch(arrSorted, 7));
+console.log(linearSearch(arrNotSorted, 7));
 //output: 7 has the index of 2
