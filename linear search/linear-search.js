@@ -3,6 +3,7 @@
  * examples: indexOf, includes, find, findIndex
  * big(O): usually O(n).
  * Use cases: when data comes not organized, it can make sense to use linear search.
+ * rate: there might be a better solution.
  */
 
 const arrLinear = [1, 2, 3, 4, 5, 6, 7];
@@ -16,5 +17,9 @@ function linearSearch(arr, search) {
 }
 
 //results
+
 console.log(linearSearch(arrLinear, 7));
+//output: 7 has the index of 6
+
 console.log(linearSearch(arrSorted, 7));
+//output: 7 has the index of 2
