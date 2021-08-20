@@ -1,11 +1,12 @@
 /**
- * Binary search is musch faster than linear search.
+ * Binary search is much faster than linear search.
  * Different from linear search, binary search implements such a logic that it covers half of the data structure
  * and, based on the searched value, it can infer if it proceeds its search to its left or right. By doing this
  * it drastically reduces time.
  *
  * NOTICE, the iteratable data structure, i.e. an array, must be organized, sorted.
  *
+ * BIG(O): Worst and average case O(log n)
  *
  */
 
@@ -36,7 +37,7 @@ function binarySearch(arr, value) {
     if (checks === arr.length) return "nothing found!!";
   }
 
-  return pivotPoint;
+  return `The index of the value provided is ${pivotPoint}`;
 }
 
 console.log(binarySearch(arrSorted, 42));
