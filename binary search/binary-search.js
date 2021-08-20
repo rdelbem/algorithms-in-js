@@ -19,6 +19,7 @@ function binarySearch(arr, value) {
   let start = 0;
   let end = arr.length - 1;
   let pivotPoint = Math.floor((start + end) / 2);
+  let checks = 0;
 
   while (arr[pivotPoint] !== value) {
     console.log(start, pivotPoint, end);
@@ -29,9 +30,13 @@ function binarySearch(arr, value) {
     }
 
     pivotPoint = Math.floor((start + end) / 2);
+
+    //fail safe
+    checks++;
+    if (checks === arr.length) return "nothing found!!";
   }
 
   return pivotPoint;
 }
 
-console.log(binarySearch(arrSorted, 40));
+console.log(binarySearch(arrSorted, 42));
