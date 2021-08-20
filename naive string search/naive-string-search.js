@@ -21,4 +21,4 @@ function naiveStringSearch(string, pattern) {
   return numOfLettersMatched;
 }
 
-console.log(naiveStringSearch(string, "omg"));
+console.log(naiveStringSearch(string, "og"));
