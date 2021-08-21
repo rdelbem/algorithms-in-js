@@ -12,7 +12,10 @@
  */
 
 function sym(...args) {
-  const countOccurrencesObj = {};
+  //deep copy of args
+  let clonedArrayOfArgs = JSON.parse(JSON.stringify(args));
+  let totalIterations = args.length;
+  let countOccurrencesObj = {};
   const symmetricDifference = [];
   let pairs = [];
   let newArgs = [];
@@ -22,36 +25,41 @@ function sym(...args) {
     let cleaningFirstArr = [...new Set(pairs[0])]; //this removes the internal duplicates
     let cleaningSecondArr = [...new Set(pairs[1])]; //this removes the internal duplicates
     let concatenated = cleaningFirstArr.concat(cleaningSecondArr);
-    concatenated.forEach(
-      (item) => (countOccurrencesObj[item] = countOccurrencesObj[item] + 1 || 1)
-    );
+    concatenated.forEach((item) => {
+      countOccurrencesObj[item] = countOccurrencesObj[item] + 1 || 1;
+    });
   };
 
   //makes the pairs and sends to count
   const makePairs = (args) => {
-    pairs = [[...args[0]], [...args[1]]];
-    //console.log(pairs);
-    count(pairs);
+    if (args.length === clonedArrayOfArgs.length) {
+      pairs = [[...args[0]], [...args[1]]];
+    } else {
+      pairs = [...newArgs];
+    }
+    console.log(pairs);
+    //console.log(clonedArrayOfArgs)
+    if (clonedArrayOfArgs.length > 2) clonedArrayOfArgs.splice(0, 2);
+    console.log(clonedArrayOfArgs);
   };
-
-  makePairs(args); //first call
-
-  //console.log(pairs);
-  //console.log(args);
-  //console.log(countOccurrencesObj);
 
   const findSymmetry = () => {
     const valuesArray = Object.entries(countOccurrencesObj);
     for (let value of valuesArray) {
-      //console.log(value);
+      console.log(value);
       if (value[1] === 1) {
         symmetricDifference.push(parseInt(value[0]));
-        newArgs = [...symmetricDifference];
+        newArgs = [[...symmetricDifference], ...clonedArrayOfArgs];
       }
     }
   };
 
-  findSymmetry();
+  while (totalIterations > 1) {
+    makePairs(args);
+    count(pairs);
+    findSymmetry();
+    totalIterations--;
+  }
 
   console.log(symmetricDifference);
   return symmetricDifference;
@@ -59,4 +67,4 @@ function sym(...args) {
 
 //sym([1, 2, 3], [5, 2, 1, 4]);
 sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5]);
-//sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3])
+//sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3]);
