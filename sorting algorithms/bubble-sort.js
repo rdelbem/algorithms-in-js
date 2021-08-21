@@ -16,15 +16,20 @@
  */
 
 function bubble(arr) {
+  let noSwaps;
   for (let i = arr.length; i > 0; i--) {
+    noSwaps = true;
     for (let j = 0; j < i - 1; j++) {
       if (arr[j] > arr[j + 1]) {
         //swap
         let tempArrElem = arr[j];
         arr[j] = arr[j + 1];
         arr[j + 1] = tempArrElem;
+        noSwaps = false;
+        console.log(`swaped ${arr[j]} and  ${arr[j + 1]}`);
       }
     }
+    if (noSwaps) break;
   }
 
   return arr;
