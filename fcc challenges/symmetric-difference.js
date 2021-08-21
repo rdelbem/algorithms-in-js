@@ -11,58 +11,21 @@
  *
  */
 
+//answer that better handles Big O
 function sym(...args) {
-  //deep copy of args
-  let clonedArrayOfArgs = JSON.parse(JSON.stringify(args));
-  let totalIterations = args.length;
-  let countOccurrencesObj = {};
-  const symmetricDifference = [];
-  let pairs = [];
-  let newArgs = [];
+  return [...args.reduce(reducer, new Set())];
+}
 
-  // accepts only pairs because it is binary
-  const count = (pairs) => {
-    let cleaningFirstArr = [...new Set(pairs[0])]; //this removes the internal duplicates
-    let cleaningSecondArr = [...new Set(pairs[1])]; //this removes the internal duplicates
-    let concatenated = cleaningFirstArr.concat(cleaningSecondArr);
-    concatenated.forEach((item) => {
-      countOccurrencesObj[item] = countOccurrencesObj[item] + 1 || 1;
-    });
-  };
-
-  //makes the pairs and sends to count
-  const makePairs = (args) => {
-    if (args.length === clonedArrayOfArgs.length) {
-      pairs = [[...args[0]], [...args[1]]];
+function reducer(result, arr) {
+  const compare = new Set(arr);
+  for (let val of compare) {
+    if (result.has(val)) {
+      result.delete(val);
     } else {
-      pairs = [...newArgs];
+      result.add(val);
     }
-    console.log(pairs);
-    //console.log(clonedArrayOfArgs)
-    if (clonedArrayOfArgs.length > 2) clonedArrayOfArgs.splice(0, 2);
-    console.log(clonedArrayOfArgs);
-  };
-
-  const findSymmetry = () => {
-    const valuesArray = Object.entries(countOccurrencesObj);
-    for (let value of valuesArray) {
-      console.log(value);
-      if (value[1] === 1) {
-        symmetricDifference.push(parseInt(value[0]));
-        newArgs = [[...symmetricDifference], ...clonedArrayOfArgs];
-      }
-    }
-  };
-
-  while (totalIterations > 1) {
-    makePairs(args);
-    count(pairs);
-    findSymmetry();
-    totalIterations--;
   }
-
-  console.log(symmetricDifference);
-  return symmetricDifference;
+  return result;
 }
 
 //sym([1, 2, 3], [5, 2, 1, 4]);
